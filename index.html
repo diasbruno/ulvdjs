@@ -1,0 +1,24 @@
+<html>
+<body>
+<script src="mvd.js"></script>
+<script type="application/javascript">
+  function counter(c) {
+    return VNode(
+      'ul',
+      {},
+      c.map(i => VNode('li', {}, [VNodeText(i.toString())]))
+    )
+  }
+
+  let r, c = [], n = 0;
+  const frame = () => {
+    if (c.length < 10) c.push(n);
+    else c.pop();
+    n++;
+    r = patch(r, counter(c), document.body);
+  }
+  setInterval(frame, 500);
+
+</script>
+</body>
+</html>
